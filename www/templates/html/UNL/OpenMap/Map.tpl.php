@@ -110,7 +110,7 @@ var addFeature = function(feature) {
 var map = new L.Map('map');
 
 // create a CloudMade tile layer (or use other provider of your choice)
-var unlOSM = new L.TileLayer('<?php echo UNL_OpenMap_Controller::getURL(); ?>images/tiles/open-streets-lnk/{z}/{x}/{y}.png', {
+var unlOSM = new L.TileLayer('<?php echo UNL_OpenMap_Controller::getURL(); ?>images/tiles/unl/{z}/{x}/{y}.png', {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
     maxZoom: <?php echo $context->mapMaxZoom; ?>,
     minZoom: <?php echo $context->mapMinZoom; ?>,

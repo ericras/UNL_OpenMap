@@ -3,4 +3,5 @@ config.inc.php
 .buildpath
 .project
 .settings/*
+www/images/tiles
 www/images/tiles/*

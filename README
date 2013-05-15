@@ -1,45 +1,30 @@
 ** Creating map tiles:
-**********************************
-Using maptiler.org
 
-For Mac OS X 10.6+:
-    From /path/to/workspace/UNL_OpenMap/map_source or http://code.google.com/p/maptiler/ get and run:
-        1. http://www.kyngchaos.com/files/software/unixport/GDAL_Complete-1.7.dmg (nothing to do after installation)
-        2. http://maptiler.googlecode.com/issues/attachment?aid=1641967504875078876&name=maptiler-1.0-beta2fix3-macosx.zip&token=11bf9597dafa626a65cd4afa3ef5d736
-    Steps in maptiler program:
-        1. Google Maps Compatible
-        2. "Add" the full map image from /path/to/workspace/UNL_OpenMap/map_source 
-            Set "Georeference" to 40.8420 40.8112 -96.6443 -96.7198 for the UNL 3D map (current coords as of 8/18/10 for map_source/city_east_top_8-2010.png)
-        3. WGS84 - Latitude and Longitude
-        4. Min zoom: 14 max zoom: 18 and 
-            - transparent png (then after creating them see Crushing pngs below)
-            - JPEG (then after creating them see Editing JPGs below)
-        5. Save in /path/to/workspace/UNL_OpenMap/www/images/tilesets/unl - dont need a destination url
-        6. Dont need viewers
-        7. Dont worry about details
-        8. Press "Render"
+ - Clone http://github.unl.edu/iim/UNL_OpenMap_Resources
 
-Crushing pngs
-    Each tile created by MapTiler is roughly 135kb - to minimize file size:
-    1. From map_source or http://pngnq.sourceforge.net/ install pngnq (instuctions in the README)
-    2. Run:
-        cd /path/to/workspace/UNL_OpenMap/www/images/tilesets/unl
-        find . -name *.png -type f -exec echo "Processing '{}'" \; -exec pngnq -n 256 {} \;
-    3. The pngnq -f option which is supposed to overwrite the existing file doesn't work so we'll rename all the files ourself, removing the "-nq8":
-        find . -name "*-nq8.png" -exec bash -c "mv \$1 \`echo \$1 | sed s/-nq8.png/.png/\`" -- {} \;
+ - Download TileMill from http://mapbox.com/tilemill/
+ - Tell TileMill to look for the MapBox directory inside your clone above
 
-Editing JPGs
-    This will remove edge tiles that have large blocks of white
-    1. Run:
-        cd /path/to/workspace/UNL_OpenMap/www/images/tilesets/unl
-    2. Run:
-        find . -name *.jpg -type f -exec php ../../../../map_source/process_jpgs.php {} \;
-Compressing JPGs
-    (Quality can be adjusted by opening the script file specified below and changing the number by the comment "set quality to suit")
-    1. In Photoshop CS5: File->Scripts->Browse...
-    2. Select /path/to/workspace/UNL_OpenMap/map_source/photoshop_jpg_compress_script.jsx
-    3. Select /path/to/workspace/UNL_OpenMap/www/images/tilesets/unl
+ - Open UNL project
+ - Add .shp layers:
+   - lnk-highway and lnk-polygons
+   - give them those IDs
+ - Style
+ - Export->MBTiles
+    - Filename: unl.mbtiles
+    - Zoom: 14-17
+    - Center: -96.6822,40.8279,14
+    - Bounds: -96.737,40.7984,-96.6414,40.8502
 
+````bash
+cd UNL_OpenMap_Resources/tiles
+cp ../MBTiles-extractor/convert.py convert.py
+rm ../MapBox/export/unl.export*
+mv ../MapBox/export/unl.mbtiles unl.mbtiles
+python convert.py unl.mbtiles
+````
+
+  - symbolic link or copy tiles/unl to the UNL_OpenMap project at www/images/tiles/unl/
 
 ** Updating Map Features:
 **********************************
