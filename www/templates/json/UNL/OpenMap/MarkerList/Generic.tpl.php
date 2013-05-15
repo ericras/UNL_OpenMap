@@ -11,11 +11,13 @@ foreach ($context as $marker) {
     switch ($subclass) {
         case 'BikeRack':
         case 'Building':
-        case 'Campus':
         case 'EmergencyPhone':
         case 'Sculpture':
         case 'PoliceStation':
             $name = strtolower($subclass).'s';
+            break;
+        case 'Campus':
+            $name = strtolower($subclass).'es';
             break;
         default:
             throw new Exception('Unknown subclass of marker type, '.$subclass);

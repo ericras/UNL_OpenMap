@@ -13,14 +13,14 @@ class UNL_OpenMap_Map
      *
      * @var int
      */
-    public $zoom = 14;
+    public $zoom = 16;
 
     /**
      * The min zoom level a user is allowed to see
      *
      * @var int
      */
-    public $mapMinZoom = 13;
+    public $mapMinZoom = 14;
 
     /**
      * The max zoom level a user is allowed to see
